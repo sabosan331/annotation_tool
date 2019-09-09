@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+        <body onload="draw();">
+        <canvas id="canvas" width="216" height="216"></canvas>
+    
+
+    <div>
+        <img src="" id="input_img" height="200px">
+    </div>
+
+    <div>
+            <button onclick="submit()">Submit</button>
+    </div>
+</body>
+</html>
+
+
+
+<script>
+
+var bx = 20;
+bx,by = 20,30;
+console.log(bx)
+
+function draw() {
+  var ctx = document.getElementById('canvas').getContext('2d');
+  var img = new Image();
+  img.src = './img/1.png';
+  console.log(img.width,img.height)
+  img.onload = function(){
+    // ctx.drawImage(img,0,0);
+    ctx.drawImage(img, 0, 0, 216, 216);
+    ctx.lineWidth = "3";
+    ctx.strokeStyle = "#00ff00";
+    ctx.beginPath();
+
+    let bx,by;
+    bx,by = 20,30;
+    let width_roi = 20;
+    let ex = bx + width_roi;
+    console.log(bx);
+    ctx.rect(20, 30,ex, 100);
+    ctx.stroke();
+    
+  };
+
+}
+
+
+
+    // show img in HTML
+    var img = document.getElementById("input_img");
+    img.src = "img/1.png"
+    
+
+    function submit() {
+
+        console.log("hoge");
+        console.log("onclick");
+
+    }
+
+</script>
+
+<style>
+
+
+div {
+  
+    /* display : flex; */
+    width: 400px;
+    padding : 20px;
+    margin : 10px auto auto auto;
+    
+    border : solid;
+    text-align: center;
+}
+
+canvas {
+    text-align: center;
+}
+
+</style>
