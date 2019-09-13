@@ -6,63 +6,74 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
-        <body onload="draw();">
-        <canvas id="canvas" width="216" height="216"></canvas>
+<body> 
+        <!-- <body onload="draw();"> -->
+    <canvas id="canvas" width="216" height="216"></canvas>
 
-    <div>
+    <!-- <div>
         <img src="" id="input_img" height="200px">
-    </div>
+    </div> -->
 
-    <div>
-            <button onclick="submit()">Submit</button>
-    </div>
 </body>
 </html>
 
 <script>
+  
+var canvas = document.getElementById('canvas'),
+ctx = canvas.getContext('2d'),
+rect = {},
+drag = false;
+var img = new Image();
 
-var bx = 20;
-bx,by = 20,30;
-console.log(bx)
+img.src = './img/1.png';
+console.log(img.width,img.height)
+
+img.onload = function(){
+// ctx.drawImage(img,0,0);
+ctx.drawImage(img, 0, 0, 216, 216);
+ctx.rect(20, 30,50, 100);
+ctx.stroke();
+ctx.lineWidth = "3";
+ctx.strokeStyle = "#00ff00";
+ctx.beginPath();
+};
+
+function init() {
+  canvas.addEventListener('mousedown', mouseDown, false);
+  canvas.addEventListener('mouseup', mouseUp, false);
+  canvas.addEventListener('mousemove', mouseMove, false);
+}
+
+function mouseDown(e) {
+  rect.startX = e.pageX - this.offsetLeft;
+  rect.startY = e.pageY - this.offsetTop;
+  drag = true;
+}
+
+function mouseUp() {
+  drag = false;
+    // ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+function mouseMove(e) {
+  if (drag) {
+    rect.w = (e.pageX - this.offsetLeft) - rect.startX;
+    rect.h = (e.pageY - this.offsetTop) - rect.startY ;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    draw();
+  }
+}
 
 function draw() {
-  var ctx = document.getElementById('canvas').getContext('2d');
-  var img = new Image();
-  img.src = './img/1.png';
-  console.log(img.width,img.height)
-  img.onload = function(){
-    ctx.drawImage(img,0,0);
+    ctx.setLineDash([6]);
     ctx.drawImage(img, 0, 0, 216, 216);
-    ctx.lineWidth = "3";
-    ctx.strokeStyle = "#00ff00";
-    ctx.beginPath();
-
-    let bx,by;
-    bx,by = 20,30;
-    let width_roi = 20;
-    let ex = bx + width_roi;
-    console.log(bx);
-    ctx.rect(20, 30,50, 100);
-    ctx.stroke();
-    
-  };
+    ctx.strokeRect(rect.startX, rect.startY, rect.w, rect.h);
+    ctx.rect(rect.startX, rect.startY, rect.w, rect.h);
+    // console.log(rect.startX, rect.startY, rect.w, rect.h)
 
 }
 
+init();
 
-
-    // show img in HTML
-    var img = document.getElementById("input_img");
-    img.src = "img/1.png"
-    
-
-    function submit() {
-
-        console.log("hoge");
-        console.log("onclick");
-
-    }
 
 </script>
 
@@ -70,7 +81,6 @@ function draw() {
 
 
 div {
-  
     /* display : flex; */
     width: 400px;
     padding : 20px;
@@ -81,7 +91,8 @@ div {
 }
 
 canvas {
-    text-align: center;
+    text-align : center;
+    border : 1px solid #000000;
 }
 
 </style>
