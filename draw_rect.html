@@ -7,11 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-
-
         <body onload="draw();">
         <canvas id="canvas" width="216" height="216"></canvas>
-    
 
     <div>
         <img src="" id="input_img" height="200px">
@@ -22,8 +19,6 @@
     </div>
 </body>
 </html>
-
-
 
 <script>
 
@@ -37,7 +32,7 @@ function draw() {
   img.src = './img/1.png';
   console.log(img.width,img.height)
   img.onload = function(){
-    // ctx.drawImage(img,0,0);
+    ctx.drawImage(img,0,0);
     ctx.drawImage(img, 0, 0, 216, 216);
     ctx.lineWidth = "3";
     ctx.strokeStyle = "#00ff00";
@@ -48,7 +43,7 @@ function draw() {
     let width_roi = 20;
     let ex = bx + width_roi;
     console.log(bx);
-    ctx.rect(20, 30,ex, 100);
+    ctx.rect(20, 30,50, 100);
     ctx.stroke();
     
   };
